@@ -1,42 +1,36 @@
 # Debounce
 
-Really small Arduino library for button Debouncing. It's basically the Debounce example found on http://arduino.cc/en/Tutorial/Debounce wrapped as a library.
+用于按键消抖的占用资源很小的 Arduino 库。例见 http://arduino.cc/en/Tutorial/Debounce 。
 
-Really easy to use, with 3 examples included.
+非常易于使用，包含三个例子。
 
-**Tested on an Arduino Due only.**
+**仅在 Arduino Due 测试过**
 
-## Instructions
+## 介绍
 
-Include the library in your sketch:
+引入库头文件到你的程序。
 
     #include <Debounce.h>
 
-### Constructor
+### 构造
 
-Use one of this two constructors, the default delay works great and is the recommended constructor.
+有如下两种：
 
-#### Debounce Button With Default Delay
-
-Create a Debounce object for your button, with a default delay of 50ms:
+#### 创建默认延时50ms的消抖按钮对象
 
     Debounce Button(4); // 4 is the pin, could be a variable too.
 
-#### Debounce Button With a Custom Delay
-
-Create a Debounce object for yoiur button, with a custom delay:
+#### 创建自定义延时时间的消抖按钮对象
 
     Debounce Button(4, 80); // 4 is the pin, 80 is the delay, in ms.
 
-## Functions
-
-Debounce has only 2 functions.
+## 函数仅有两个
 
 ### read()
 
-Inside your code, **Button.read();** reads your button state and returns HIGH or LOW after debouncing it. When using **INPUT**, the pressed button will return HIGH, it'll return LOW when pressed if you use **INPUT_PULLUP**.
+在你的代码中， **Button.read();** 读取消抖后的你的按钮状态返回 HIGH 或 LOW，按压按钮当使用 **INPUT** 时会返回 HIGH ，当使用 **INPUT_PULLUP** 时会返回 LOW 。
 
-This will turn the led on pin 13 ON when the button is pressed and debounced, it stays on until you release the button.
+下面的例子当按压并消抖按钮时会点亮13引脚的LED，直到你释放按钮。
 
     void loop() {
       digitalWrite(13, Button.read());
@@ -44,9 +38,9 @@ This will turn the led on pin 13 ON when the button is pressed and debounced, it
 
 ### count()
 
-Returns the counter of changes ocurred, each time you press the button, it will add 1 to the counter, and it will also add 1 to the counter when you release the button.
+返回每次你操作按钮之后按钮发生改变的次数，按压和释放都会次数+1.
 
-This will turn the led only when the button has been pressed and released 5 times.
+下面的语句会只有在按钮被按压和释放5次时点亮LED。
 
     if (Button.count() == 10) {
       digitalWrite(13, HIGH);
@@ -56,4 +50,4 @@ This will turn the led only when the button has been pressed and released 5 time
     
 ### resetCount()
 
-Resets the counter for the button changes.
+返回按钮变化的次数。
